@@ -1,6 +1,20 @@
+import java.util.*;
+import java.io.*;
+
 public class Main {
 
   public static int[][] workGrid;
+  public static int periodOne = 1;
+  public static int periodTwo = 2;
+  public static int periodThree = 4;
+  public static int periodFour = 16;
+  public static int workAmtOne = 100;
+  public static int workAmtTwo = 200;
+  public static int workAmtThree = 400;
+  public static int workAmtFour = 1600;
+
+  public static int framePeriod = 16;
+  public static int timeUnit = 100;
 
   public static void initWorkGrid() {
     workGrid = new int[10][10];
@@ -25,6 +39,10 @@ public class Main {
 
   public static void main(String[] args) {
     initWorkGrid();
-    doWork();
+    Thread scheduler = new Scheduler();
+    scheduler.start();
+
+
+
   }
 }
