@@ -79,24 +79,28 @@ public class Scheduler extends Thread {
           if(time % t1.period == 0) {
             if(!t1.finished) {
               t1Missed++;
+              t1.counter--;
             }
             s1.release();
           }
           if(time % t2.period == 0) {
             if(!t2.finished) {
               t2Missed++;
+              t2.counter--;
             }
             s2.release();
           }
           if(time % t3.period == 0) {
             if(!t3.finished) {
               t3Missed++;
+              t3.counter--;
             }
             s3.release();
           }
           if(time % t4.period == 0) {
             if(!t4.finished) {
               t4Missed++;
+              t4.counter--;
             }
             s4.release();
           }
