@@ -8,20 +8,24 @@ public class SchedThread extends Thread {
   public Semaphore sem;
   public boolean finished;
   public int counter;
+  public Semaphore scheduleSemaphore;
 
-  public SchedThread(int workAmt, int period, Semaphore sem) {
+  public SchedThread(int workAmt, int period, Semaphore sem, Semaphore scheduleSemaphore) {
     this.workAmt = workAmt;
     this.period = period;
     this.sem = sem;
     this.finished = false;
     this.counter = 0;
+    this.scheduleSemaphore = scheduleSemaphore;
   }
 
   public void work() {
     try {
+      sem.acquire();
+      finished = false;
       while(!finished) {
-        sem.acquire();
-        System.out.println(period);
+
+        //System.out.println(period);
         for (int i = 0; i < workAmt; i++) {
           Main.doWork();
         }
@@ -32,8 +36,13 @@ public class SchedThread extends Thread {
   }
 
   public void run() {
+    while(true) {
+      work();
+      if (scheduleSemaphore.tryAcquire()) {
+        counter--;
+        break;
+      }
+    }
 
-    finished = false;
-    work();
   }
 }

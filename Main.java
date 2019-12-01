@@ -14,7 +14,7 @@ public class Main {
   public static int workAmtFour = 1600;
 
   public static int framePeriod = 16;
-  public static int timeUnit = 100;
+  public static int timeUnit = 10; //in ms
 
   public static void initWorkGrid() {
     workGrid = new int[10][10];
